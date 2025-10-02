@@ -34,3 +34,6 @@ print(f"Number of stars found: {len(results)}")
 bad_ph = results['ph_qual'] != 'AAA'
 
 
+#------------------------------------Task 4------------------------------------
+# Identify stars with negative parallax
+neg_par = results['parallax'] < 0
