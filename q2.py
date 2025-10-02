@@ -66,11 +66,13 @@ ax1.invert_yaxis()
 ax1.set_title('Gaia CMD')
 
 # 2MASS CMD
-ax2.scatter(good_stars['j_m'] - good_stars['ks_m'], good_stars['ks_m'], s=5, color='blue', alpha=0.5)
+ax2.scatter(good_stars['j_m'] - good_stars['ks_m'], good_stars['h_m'], s=5, color='blue', alpha=0.5)
 ax2.set_xlabel('J - Ks (mag)')
-ax2.set_ylabel('ks (mag)')
+ax2.set_ylabel('h (mag)')
 ax2.invert_yaxis()
 ax2.set_title('2MASS CMD')
+
+fig.suptitle('Color-Magnitude Diagrams for Ruprecht 147')
 
 plt.tight_layout()
 
@@ -83,3 +85,7 @@ if not os.path.exists('figures'):
 
 # Save figure
 plt.savefig('figures/cmds_R147.png', dpi=200)
+
+#--------------------------------Task 8------------------------------------
+# Give recommendations or obervations
+
