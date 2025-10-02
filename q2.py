@@ -87,5 +87,8 @@ if not os.path.exists('figures'):
 plt.savefig('figures/cmds_R147.png', dpi=200)
 
 #--------------------------------Task 8------------------------------------
-# Give recommendations or obervations
+# Give recommendations for observations 
 
+print('The 2dF fibre positioner on the HERMES spectrograph has 392 science fibres and covers 2 square degrees on the sky')
+print('There is a minimum separation of 30 arcseconds between fibres, but the spectrograph can cover most of the defined cone search (3.14 square degrees). ')
+print(f'To observed all {len(good_stars)} stars with good photometry, a minimum of {len(good_stars)//392 + 1} pointings are required')
