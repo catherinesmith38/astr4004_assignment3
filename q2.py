@@ -37,3 +37,9 @@ bad_ph = results['ph_qual'] != 'AAA'
 #------------------------------------Task 4------------------------------------
 # Identify stars with negative parallax
 neg_par = results['parallax'] < 0
+
+
+#------------------------------------Task 5------------------------------------
+# Apply quality cuts and print the number of stars remaining
+good_stars = results[~bad_ph & ~neg_par]
+print(f"Number of good quality stars: {len(good_stars)}")
