@@ -2,6 +2,7 @@
 from astroquery.gaia import Gaia
 import matplotlib.pyplot as plt
 import numpy as np
+import os
 
 
 #------------------------------------Task 1------------------------------------
@@ -72,4 +73,13 @@ ax2.invert_yaxis()
 ax2.set_title('2MASS CMD')
 
 plt.tight_layout()
-plt.show()
+
+#--------------------------------Task 7------------------------------------
+# Save the plots
+
+# Make figures directory if one does not already exist
+if not os.path.exists('figures'):
+    os.makedirs('figures')
+
+# Save figure
+plt.savefig('figures/cmds_R147.png', dpi=200)
