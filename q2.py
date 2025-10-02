@@ -20,19 +20,11 @@ WHERE DISTANCE(289.074, -16.323, g.ra, g.dec) < 1
 AND phot_g_mean_mag < 14
 """
 
-#TODO get the cross match working
-# Cross match query looks something like this
-#FROM gaiadr3.gaia_source AS g
-#JOIN gaiadr3.tmass_psc_xsc_neighbourhood AS tm ON g.source_id = tm.source_id
-#JOIN gaiadr1.tmass_original_valid AS tm_orig ON tm.original_ext_source_id = tm_orig.tmass_oid
-
 # Execute the query
 job = Gaia.launch_job_async(query)
 results = job.get_results()
 
-
 #------------------------------------Task 2------------------------------------
-
-
-print(len(results))
+# Print the number of stars from this query 
+print(f"Number of stars found: {len(results)}")
 
