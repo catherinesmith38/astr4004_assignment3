@@ -1,5 +1,7 @@
 #Imports
 from astroquery.gaia import Gaia
+import matplotlib.pyplot as plt
+import numpy as np
 
 
 #------------------------------------Task 1------------------------------------
@@ -43,3 +45,31 @@ neg_par = results['parallax'] < 0
 # Apply quality cuts and print the number of stars remaining
 good_stars = results[~bad_ph & ~neg_par]
 print(f"Number of good quality stars: {len(good_stars)}")
+
+
+#------------------------------------Task 6------------------------------------
+# Plot CMD from both Gaia and 2MASS
+
+# Calculate absolute G magnitude
+distance_pc = 1000 / good_stars['parallax']  # Distance in parsecs
+g_abs = good_stars['phot_g_mean_mag'] - 5 * (np.log10(distance_pc) - 1)
+
+# Set up subplots
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 6))
+
+# Gaia CMD
+ax1.scatter(good_stars['bp_rp'], g_abs, s=5, color='blue', alpha=0.5)
+ax1.set_xlabel('Bp - Rp (mag)')
+ax1.set_ylabel('G (mag)')
+ax1.invert_yaxis()
+ax1.set_title('Gaia CMD')
+
+# 2MASS CMD
+ax2.scatter(good_stars['j_m'] - good_stars['ks_m'], good_stars['ks_m'], s=5, color='blue', alpha=0.5)
+ax2.set_xlabel('J - Ks (mag)')
+ax2.set_ylabel('ks (mag)')
+ax2.invert_yaxis()
+ax2.set_title('2MASS CMD')
+
+plt.tight_layout()
+plt.show()
