@@ -28,3 +28,9 @@ results = job.get_results()
 # Print the number of stars from this query 
 print(f"Number of stars found: {len(results)}")
 
+
+#------------------------------------Task 3------------------------------------
+# Identify stars with bad 2MASS photometry
+bad_ph = results['ph_qual'] != 'AAA'
+
+
