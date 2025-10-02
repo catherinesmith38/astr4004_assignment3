@@ -43,7 +43,7 @@ ax1.set_ylabel('Gas Phase Metallicity')
 fit, cov = np.polyfit(r_gal, a_o, 1, cov=True)
 x_fit = np.linspace(min(r_gal), max(r_gal), 100)
 y_fit = np.polyval(fit, x_fit)
-ax1.plot(x_fit, y_fit, color='red', label=f'Fit: y={fit[0]:.2e}x + {fit[1]:.2f}')
+ax1.plot(x_fit, y_fit, color='red', label=f'Fit: y={fit[0]:.2f}x + {fit[1]:.2f}')
 ax1.legend(loc='lower left')
 ax1.set_title('Radial Metallicity Gradient')
 
@@ -61,3 +61,12 @@ plt.tight_layout()
 
 # save to figures 
 plt.savefig('figures/rmg_linear_fit.png', dpi=300)
+
+
+#-----------------------------Task 2-----------------------------
+# Quote error on slope and intercept from covariance matrix
+slope_err = np.sqrt(cov[0, 0])
+intercept_err = np.sqrt(cov[1, 1])
+
+print(f"Slope: {fit[0]:.2e} +/- {slope_err:.2e}")
+print(f"Intercept: {fit[1]:.2e} +/- {intercept_err:.2e}")
