@@ -70,3 +70,18 @@ intercept_err = np.sqrt(cov[1, 1])
 
 print(f"Slope: {fit[0]:.2e} +/- {slope_err:.2e}")
 print(f"Intercept: {fit[1]:.2e} +/- {intercept_err:.2e}")
+
+
+# -----------------------------Task 3-----------------------------
+# Quantify the goodness of fit 
+
+# Root mean square error
+rmse = np.sqrt(sum(residuals**2)/len(a_o))
+print(f"Root Mean Square Error: {rmse:.2e}")
+
+# R-squared
+ss_total = np.sum((a_o - np.mean(a_o))**2)
+ss_residual = np.sum(residuals**2)
+r_squared = 1 - (ss_residual / ss_total)
+print(f"R-squared: {r_squared:.4f}")
+
