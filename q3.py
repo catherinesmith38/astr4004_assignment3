@@ -207,3 +207,11 @@ print('The number of bins was chosen so that the median model fit exhibits a lin
 'The number of bins is increased until this value for optimal detail in substructe of the A(O) distribution.')
 print('If there were fewer bins than higher order structure would be lost and blended together.')
 print('Increasing the number of bins leads to misleading medians becase they are too few simulated data points per bin.')
+
+# -----------------------------Task 6-----------------------------
+# Analyse patterns in residuals 
+
+print('There is spiral structure in the residuals, both in positive and negative residuals. ' \
+'This likely comes from the spiral arms of the simulated galaxy, with the positive residuals appearing where the spiral arms are, '
+'and the negative residual are in regions with an underdensity of gas between the spiral arms.')
+print('Because there is a more complicated gas density function in a spiral galaxy, the gas metallicity function must also follow this structure.')
