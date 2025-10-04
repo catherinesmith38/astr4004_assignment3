@@ -130,19 +130,21 @@ def median_xy(x, y, variable, bins):
                 median[i, j] = np.nan
     return median, (x_bin_edges, y_bin_edges)
 
+bins = 30
+
 # take collapsed median of simulated data
-a_o_median, (x_bin_edges, y_bin_edges) = median_xy(data['x'], data['y'], data['a_o'], bins=30)
+a_o_median, (x_bin_edges, y_bin_edges) = median_xy(data['x'], data['y'], data['a_o'], bins=bins)
 
 
 # Calculate fit 
 a_o_fit = slope * np.sqrt(data['x']**2 + data['y']**2 + data['z']**2) + intercept
 # Take the collapsed median of fitted data 
-a_o_fit_median, (x_bin_edges_fit, y_bin_edges_fit) = median_xy(data['x'], data['y'], a_o_fit, bins=30)
+a_o_fit_median, (x_bin_edges_fit, y_bin_edges_fit) = median_xy(data['x'], data['y'], a_o_fit, bins=bins)
 
 # Find residuals
 residuals = data['a_o'] - a_o_fit
 # take the collapsed median
-residuals_median, (x_res, y_res) = median_xy(data['x'], data['y'], residuals, bins=30)
+residuals_median, (x_res, y_res) = median_xy(data['x'], data['y'], residuals, bins=bins)
 
 # set up figure
 fig, (ax1, ax2, ax3) = plt.subplots(1,3, figsize=(15, 6))
@@ -194,5 +196,14 @@ plt.colorbar(im3, ax=ax3, label=r'$\Delta$A(O)', location='bottom')
 
 plt.tight_layout()
 # save to figures
-plt.savefig('figures/histograms_a_o_fit_residuals.png', dpi=300)
+plt.savefig(f'figures/ao_data_fit_res_bins{bins}.png', dpi=300)
 
+# -----------------------------Task 5-----------------------------
+# Describe choice of 2d bins and potential issues with less or more bins. 
+
+print('The number of bins was chosen so that the median model fit exhibits a linear decrease in the radial direction. ' \
+'If the grid defined by the number of bins is properly sampled by the simulated data (i.e spherical distribution of gas) then the median values of the linear fit should be solution at z=0. ' \
+'Significant deviations from the linear radial distribution indicate that the chosen binning is too high. ' \
+'The number of bins is increased until this value for optimal detail in substructe of the A(O) distribution.')
+print('If there were fewer bins than higher order structure would be lost and blended together.')
+print('Increasing the number of bins leads to misleading medians becase they are too few simulated data points per bin.')
