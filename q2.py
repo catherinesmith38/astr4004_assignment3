@@ -19,7 +19,7 @@ SELECT g.source_id, g.ra, g.dec, g.phot_g_mean_mag, g.bp_rp, g.parallax, tm.j_m,
 FROM gaiadr3.gaia_source AS g
 JOIN gaiadr3.tmass_psc_xsc_best_neighbour AS xm ON g.source_id = xm.source_id
 JOIN gaiadr1.tmass_original_valid AS tm ON xm.clean_tmass_psc_xsc_oid = tm.tmass_oid
-WHERE DISTANCE(289.074, -16.323, g.ra, g.dec) < 1
+WHERE DISTANCE({ra_cen}, {dec_cen}, g.ra, g.dec) < 1
 AND phot_g_mean_mag < 14
 """
 
