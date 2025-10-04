@@ -153,7 +153,9 @@ im1 = ax1.imshow(
     origin='lower',
     extent=[x_bin_edges[0], x_bin_edges[-1], y_bin_edges[0], y_bin_edges[-1]],
     cmap='plasma',
-    aspect='equal'
+    aspect='equal', 
+    vmax=np.nanmax([np.nanmax(a_o_median), np.nanmax(a_o_fit_median)]), 
+    vmin=np.nanmin([np.nanmin(a_o_median), np.nanmin(a_o_fit_median)]) # ensure fitted and simulated data are on the same colour scale
 )
 ax1.set_xlabel('X (kpc)')
 ax1.set_ylabel('Y (kpc)')
@@ -167,6 +169,8 @@ im2 = ax2.imshow(
     extent=[x_bin_edges_fit[0], x_bin_edges_fit[-1], y_bin_edges_fit[0], y_bin_edges_fit[-1]],
     cmap='plasma',
     aspect='equal', 
+    vmax=np.nanmax([np.nanmax(a_o_median), np.nanmax(a_o_fit_median)]), 
+    vmin=np.nanmin([np.nanmin(a_o_median), np.nanmin(a_o_fit_median)])
 )
 ax2.set_xlabel('X (kpc)')
 ax2.set_ylabel('Y (kpc)')
