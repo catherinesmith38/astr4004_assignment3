@@ -11,7 +11,7 @@ import matplotlib.pyplot as plt
 #-----------------------------Task 1-----------------------------
 # download data and make plot of radial metallictity gradient 
 
-file_path = 'https://github.com/svenbuder/astr4004_2025_week8/blob/main/data/nihao_uhd_simulation_g8.26e11_xyz_positions_and_oxygen_ao.fits'
+file_path = "https://raw.githubusercontent.com/svenbuder/astr4004_2025_week8/main/data/nihao_uhd_simulation_g8.26e11_xyz_positions_and_oxygen_ao.fits"
 file_name = 'nihao_uhd_simulation_g8.26e11_xyz_positions_and_oxygen_ao.fits'
 
 # if not already downloaded, download the file into data folder
@@ -75,6 +75,7 @@ intercept_err = np.sqrt(cov[1, 1])
 
 print(f"Slope: {slope:.2e} +/- {slope_err:.2e}")
 print(f"Intercept: {intercept:.2e} +/- {intercept_err:.2e}")
+print('Only hyperparameter is the degree of the polynomial fit = 1')
 
 
 # -----------------------------Task 3-----------------------------
@@ -89,6 +90,7 @@ ss_total = np.sum((a_o - np.mean(a_o))**2)
 ss_residual = np.sum(residuals**2)
 r_squared = 1 - (ss_residual / ss_total)
 print(f"R-squared: {r_squared:.4f}")
+print('Visually the linear model fits best at small galactic radius, this is because there is more scatter in the Oxygen abundances at higher radii.')
 
 # -----------------------------Task 4-----------------------------
 # plot 3 planel figure of 2d histograms in the x y plane of median a_o, linear fit and residuals
