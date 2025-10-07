@@ -33,6 +33,17 @@ except:
     # If the query fails use the already downloaded gaia sample
     results = fits.open('data/q2_gaia_sample.fits')[1].data
 
+
+# Query for gaia sample in the data directory
+"""
+SELECT g.source_id, g.ra, g.dec, g.phot_g_mean_mag, g.bp_rp, g.parallax, tm.j_m, tm.h_m, tm.ks_m, tm.ph_qual 
+FROM gaiadr3.gaia_source AS g 
+JOIN gaiadr3.tmass_psc_xsc_best_neighbour AS xm ON g.source_id = xm.source_id 
+JOIN gaiadr1.tmass_original_valid AS tm ON xm.clean_tmass_psc_xsc_oid = tm.tmass_oid 
+WHERE DISTANCE(289.074, -16.323, g.ra, g.dec) < 1 AND phot_g_mean_mag < 14
+"""
+
+
 #------------------------------------Task 2------------------------------------
 # Print the number of stars from this query 
 print(f"Number of stars found: {len(results)}")
@@ -45,7 +56,7 @@ bad_ph = results['ph_qual'] != 'AAA'
 
 #------------------------------------Task 4------------------------------------
 # Identify stars with negative parallax
-neg_par = results['parallax'] < 0
+neg_par = results['parallax'] <= 0
 
 
 #------------------------------------Task 5------------------------------------
@@ -66,15 +77,15 @@ fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 6))
 
 # Gaia CMD
 ax1.scatter(good_stars['bp_rp'], g_abs, s=5, color='blue', alpha=0.5)
-ax1.set_xlabel('Bp - Rp (mag)')
-ax1.set_ylabel('G (mag)')
+ax1.set_xlabel('Bp - Rp')
+ax1.set_ylabel('Absolute G')
 ax1.invert_yaxis()
 ax1.set_title('Gaia CMD')
 
 # 2MASS CMD
 ax2.scatter(good_stars['j_m'] - good_stars['ks_m'], good_stars['h_m'], s=5, color='blue', alpha=0.5)
-ax2.set_xlabel('J - Ks (mag)')
-ax2.set_ylabel('h (mag)')
+ax2.set_xlabel('J - Ks')
+ax2.set_ylabel('Apparent H')
 ax2.invert_yaxis()
 ax2.set_title('2MASS CMD')
 
