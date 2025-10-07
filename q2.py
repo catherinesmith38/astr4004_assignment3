@@ -31,7 +31,7 @@ try:
     results = job.get_results()
 except:
     # If the query fails use the already downloaded gaia sample
-    results = fits.open('data/q2_gaia_sample')[1].data
+    results = fits.open('data/q2_gaia_sample.fits')[1].data
 
 #------------------------------------Task 2------------------------------------
 # Print the number of stars from this query 
