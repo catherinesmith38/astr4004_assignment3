@@ -3,6 +3,7 @@ from astropy.io import fits
 import os
 from urllib.request import urlretrieve
 import numpy as np
+from matplotlib.colors import LogNorm
 import matplotlib.pyplot as plt
 
 
@@ -34,10 +35,11 @@ a_o = data['a_o']
 fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 5))
 
 
-ax1.hist2d(r_gal, a_o, bins=50, cmap='plasma', cmin=1)
+h1 = ax1.hist2d(r_gal, a_o, bins=50, cmap='plasma', cmin=1, norm=LogNorm())
 ax1.set_xlabel('Galactocentric Radius (kpc)')
 ax1.set_ylabel('Gas Phase Metallicity')
-#ax1.set_xscale('log')
+cbar1 = fig.colorbar(h1[3], ax=ax1)
+cbar1.set_label('Counts')
 
 # linear fit
 fit, cov = np.polyfit(r_gal, a_o, 1, cov=True)
@@ -49,13 +51,13 @@ ax1.set_title('Radial Metallicity Gradient')
 
 # residuals of fit with log-spaced bins on x-axis
 residuals = a_o - np.polyval(fit, r_gal)
-ax2.hist2d(r_gal, residuals, bins=50, cmap='plasma', cmin=1)
+h2 = ax2.hist2d(r_gal, residuals, bins=50, cmap='plasma', cmin=1)
 ax2.axhline(0, color='red', linestyle='--')
 ax2.set_xlabel('Galactocentric Radius (kpc)')
 ax2.set_ylabel('Residuals')
 ax2.set_title('Residuals of Fit')
-#ax2.set_xscale('log')
-ax2.set_yscale('linear')
+cbar2 = fig.colorbar(h2[3], ax=ax2)
+cbar2.set_label('Counts')
 
 plt.tight_layout()
 
