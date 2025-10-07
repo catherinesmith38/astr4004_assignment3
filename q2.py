@@ -3,6 +3,7 @@ from astroquery.gaia import Gaia
 import matplotlib.pyplot as plt
 import numpy as np
 import os
+from astropy.io import fits
 
 
 #------------------------------------Task 1------------------------------------
@@ -23,9 +24,14 @@ WHERE DISTANCE({ra_cen}, {dec_cen}, g.ra, g.dec) < 1
 AND phot_g_mean_mag < 14
 """
 
-# Execute the query
-job = Gaia.launch_job_async(query)
-results = job.get_results()
+
+try:
+    # Execute the query
+    job = Gaia.launch_job_async(query)
+    results = job.get_results()
+except:
+    # If the query fails use the already downloaded gaia sample
+    results = fits.open('data/q2_gaia_sample')[1].data
 
 #------------------------------------Task 2------------------------------------
 # Print the number of stars from this query 
